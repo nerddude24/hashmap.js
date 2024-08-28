@@ -102,12 +102,38 @@ class LinkedList {
 		return false;
 	}
 
+	containsKey(key) {
+		let current = this._head;
+
+		while (current != null) {
+			if (current.val.key === key) return true;
+			current = current.next;
+		}
+
+		// moved through entire list and didn't find target.
+		return false;
+	}
+
 	find(target) {
 		let current = this._head;
 		let currentIndex = 0;
 
 		while (current != null) {
 			if (current.val === target) return currentIndex;
+			current = current.next;
+			currentIndex++;
+		}
+
+		// moved through entire list and didn't find target.
+		return -1;
+	}
+
+	findByKey(key) {
+		let current = this._head;
+		let currentIndex = 0;
+
+		while (current != null) {
+			if (current.val.key === key) return currentIndex;
 			current = current.next;
 			currentIndex++;
 		}
