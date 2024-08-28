@@ -236,6 +236,33 @@ class LinkedList {
 
 		console.warn("Tried to update value at invalid index: " + index);
 	}
+
+	getKeys() {
+		let current = this._head;
+		let keys = [];
+
+		while (current != null) keys.append(current.val.key);
+
+		return keys;
+	}
+
+	getValues() {
+		let current = this._head;
+		let values = [];
+
+		while (current != null) values.append(current.val.val);
+
+		return values;
+	}
+
+	getPairs() {
+		let current = this._head;
+		let pairs = [];
+
+		while (current != null) pairs.append([...current.val]);
+
+		return pairs;
+	}
 }
 
 export { Node, LinkedList };
