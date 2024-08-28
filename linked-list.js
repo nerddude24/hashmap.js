@@ -56,19 +56,6 @@ class LinkedList {
 		return this._tail;
 	}
 
-	at(index) {
-		let current = this._head;
-		let currentIndex = 0;
-
-		while (current != null) {
-			if (currentIndex == index) return current;
-			current = current.next;
-			currentIndex++;
-		}
-
-		return null;
-	}
-
 	pop() {
 		if (this._tail == null) {
 			console.warn("Tried to pop tail when it's already null!");
@@ -142,23 +129,6 @@ class LinkedList {
 		return -1;
 	}
 
-	updateValueAt(index, newVal) {
-		let current = this._head;
-		let currentIndex = 0;
-
-		while (current != null) {
-			if (currentIndex === index) {
-				current.val.val = newVal;
-				return;
-			}
-
-			current = current.next;
-			currentIndex++;
-		}
-
-		console.warn("Tried to update value at invalid index: " + index);
-	}
-
 	toString() {
 		let current = this._head;
 		let str = "";
@@ -172,6 +142,19 @@ class LinkedList {
 		str += "null";
 
 		return str;
+	}
+
+	at(index) {
+		let current = this._head;
+		let currentIndex = 0;
+
+		while (current != null) {
+			if (currentIndex == index) return current;
+			current = current.next;
+			currentIndex++;
+		}
+
+		return null;
 	}
 
 	insertAt(val, index) {
@@ -235,6 +218,23 @@ class LinkedList {
 
 		console.warn("Warning: Tried to remove at invalid index");
 		return null;
+	}
+
+	updateValueAt(index, newVal) {
+		let current = this._head;
+		let currentIndex = 0;
+
+		while (current != null) {
+			if (currentIndex === index) {
+				current.val.val = newVal;
+				return;
+			}
+
+			current = current.next;
+			currentIndex++;
+		}
+
+		console.warn("Tried to update value at invalid index: " + index);
 	}
 }
 

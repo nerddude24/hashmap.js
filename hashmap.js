@@ -39,6 +39,15 @@ class HashMap {
 		// else update existing node
 		bucket.updateByValue(nodeIndex, val);
 	}
+
+  get(key) {
+    const hashCode = hash(key);
+		const bucket = this._buckets[hashCode];
+    const nodeIndex =bucket.findByKey(key);
+
+    if(nodeIndex == -1) return null
+    else return bucket.at(nodeIndex).val;
+  }
 }
 
 export { HashMap };
