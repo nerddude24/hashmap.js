@@ -1,0 +1,27 @@
+{
+	"name": "hashmap.js",
+	"version": "1.0.0",
+	"description": "A lightweight working implementation of hashmaps in JavaScript.",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nerddude24/hashmap.js.git"
+	},
+	"keywords": [
+		"dsa",
+		"algorithms",
+		"linked-list",
+		"data-structures",
+		"hashmap"
+	],
+	"author": "nerddude",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/nerddude24/hashmap.js/issues"
+	},
+	"homepage": "https://github.com/nerddude24/hashmap.js#readme"
+}
