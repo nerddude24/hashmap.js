@@ -17,6 +17,28 @@ class HashMap {
 
 		return hashCode % this._buckets.length;
 	}
+
+	set(key, val) {
+		const hashCode = hash(key);
+		const bucket = this._buckets[hashCode];
+
+		// if the bucket is empty, just append and return.
+		if (bucket.size == 0) {
+			bucket.append({ key, val });
+			return;
+		}
+
+		const nodeIndex = bucket.findByKey(key);
+
+		// else if there is no node in the bucket with the specified key, append and return.
+		if (nodeIndex == -1) {
+			bucket.append({ key, val });
+			return;
+		}
+
+		// else update existing node
+		bucket.updateByValue(nodeIndex, val);
+	}
 }
 
 export { HashMap };

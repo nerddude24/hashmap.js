@@ -142,6 +142,23 @@ class LinkedList {
 		return -1;
 	}
 
+	updateValueAt(index, newVal) {
+		let current = this._head;
+		let currentIndex = 0;
+
+		while (current != null) {
+			if (currentIndex === index) {
+				current.val.val = newVal;
+				return;
+			}
+
+			current = current.next;
+			currentIndex++;
+		}
+
+		console.warn("Tried to update value at invalid index: " + index);
+	}
+
 	toString() {
 		let current = this._head;
 		let str = "";
