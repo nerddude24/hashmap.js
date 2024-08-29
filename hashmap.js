@@ -1,14 +1,14 @@
-import LinkedList from "./linked-list.js";
+import { PairLinkedList } from "./linked-list.js";
 
 export default class HashMap {
 	constructor() {
 		this._loadFactor = 0.75;
 		this._numOfKeys = 0;
 
-		// This used to be filled with 'new LinkedList()', but it turns out that
+		// This used to be filled with 'new PairLinkedList()', but it turns out that
 		// It was filling the entire array with just one linked list which is stupid.
 		// So i swapped it for 'null' instead. and when set() is called,
-		// It automatically fills in the appropriate cell with a new LinkedList().
+		// It automatically fills in the appropriate cell with a new PairLinkedList().
 		this._buckets = new Array(16).fill(null);
 	}
 
@@ -50,20 +50,12 @@ export default class HashMap {
 
 		// because buckets start as null.
 		if (this._buckets[hashCode] == null)
-			this._buckets[hashCode] = new LinkedList();
+			this._buckets[hashCode] = new PairLinkedList();
 
 		const bucket = this._buckets[hashCode];
-
-		// if the bucket is empty, just append and return.
-		if (bucket.size == 0) {
-			bucket.append({ key, val });
-			this._numOfKeys++;
-			return;
-		}
-
 		const nodeIndex = bucket.findByKey(key);
 
-		// else if there is no node in the bucket with the specified key, append and return.
+		// if there is no node in the bucket with the specified key, append and return.
 		if (nodeIndex == -1) {
 			bucket.append({ key, val });
 			this._numOfKeys++;
