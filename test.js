@@ -30,5 +30,11 @@ console.log(test.get("lion")); // golden
 test.set("lion", "king of the junjle");
 console.log(test.get("lion")); // king of the junjle
 
+test.set("shotgun", "reloading");
+test.set("moon", "silver");
+
+console.log(test.values());
+console.log(test.length()); // 13
+
 test.set("shotgun", "fire");
 test.clear();

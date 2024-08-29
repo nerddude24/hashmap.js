@@ -40,6 +40,7 @@ class HashMap {
 		tempBuckets.forEach((val, idx) => (newBuckets[idx] = val));
 
 		this._buckets = newBuckets;
+		console.log("Expanded bucket size.");
 	}
 
 	set(key, val) {
