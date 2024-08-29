@@ -204,6 +204,18 @@ export class LinkedList {
 		console.warn("Warning: Tried to remove at invalid index");
 		return null;
 	}
+
+	toArray() {
+		let current = this._head;
+		const arr = [];
+
+		while (current != null) {
+			arr.push(current.val);
+			current = current.next;
+		}
+
+		return arr;
+	}
 }
 
 export class PairLinkedList extends LinkedList {
