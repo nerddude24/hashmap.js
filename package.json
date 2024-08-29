@@ -1,7 +1,7 @@
 {
 	"name": "hashmap.js",
 	"version": "1.1.0",
-	"description": "A lightweight working implementation of hashmaps in JavaScript.",
+	"description": "A lightweight working implementation of hashmaps & hashsets in JavaScript.",
 	"type": "module",
 	"private": true,
 	"scripts": {
