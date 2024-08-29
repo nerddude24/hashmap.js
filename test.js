@@ -20,16 +20,15 @@ console.log(test.entries());
 console.log("---------------------------");
 
 test.remove("dog");
-test.remove("apple");
-
+console.log(test.get("dog")); // null
 console.log(test.has("dog")); // false
 console.log(test.has("kite")); // true
 
-console.log(test.length()); // 10
+console.log(test.length()); // 11
+
 console.log(test.get("lion")); // golden
-console.log(test.get("dog")); // null
+test.set("lion", "king of the junjle");
+console.log(test.get("lion")); // king of the junjle
 
 test.set("shotgun", "fire");
 test.clear();
-
-console.log(test.entries());

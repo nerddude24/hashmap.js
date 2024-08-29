@@ -2,7 +2,7 @@ import { LinkedList } from "./linked-list.js";
 
 class HashMap {
 	constructor() {
-		this._loadFactor = 0.8;
+		this._loadFactor = 0.75;
 		this._numOfKeys = 0;
 
 		// This used to be filled with 'new LinkedList()', but it turns out that
@@ -21,10 +21,30 @@ class HashMap {
 				(primeNumber * hashCode + key.charCodeAt(i)) % this._buckets.length;
 		}
 
+		if (hashCode < 0 || hashCode >= this._buckets.length) {
+			throw new Error("Generated a hash code index that is out of bounds!");
+		}
+
 		return hashCode % this._buckets.length;
 	}
 
+	_expand() {
+		const numOfBuckets = this._buckets.length;
+		const maxKeys = Math.round(numOfBuckets * this._loadFactor);
+
+		if (this._numOfKeys < maxKeys) return;
+
+		const tempBuckets = this._buckets.slice();
+		const newBuckets = new Array(numOfBuckets * 2).fill(null); // double the length of the old bucket
+
+		tempBuckets.forEach((val, idx) => (newBuckets[idx] = val));
+
+		this._buckets = newBuckets;
+	}
+
 	set(key, val) {
+		this._expand();
+
 		const hashCode = this.hash(key);
 
 		// because buckets start as null.
@@ -50,7 +70,7 @@ class HashMap {
 		}
 
 		// else update existing node
-		bucket.updateByValue(nodeIndex, val);
+		bucket.updateValueAt(nodeIndex, val);
 	}
 
 	get(key) {
