@@ -1,4 +1,4 @@
-import { HashMap } from "./hashmap.js";
+import HashMap from "./hashmap.js";
 
 const test = new HashMap();
 

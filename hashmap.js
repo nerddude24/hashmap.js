@@ -1,6 +1,6 @@
 import { LinkedList } from "./linked-list.js";
 
-class HashMap {
+export default class HashMap {
 	constructor() {
 		this._loadFactor = 0.75;
 		this._numOfKeys = 0;
@@ -143,5 +143,3 @@ class HashMap {
 		return result.flat();
 	}
 }
-
-export { HashMap };
