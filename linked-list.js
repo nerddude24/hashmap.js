@@ -5,7 +5,7 @@ class Node {
 	}
 }
 
-class LinkedList {
+export default class LinkedList {
 	constructor() {
 		this._head = null;
 		this._tail = null;
@@ -284,4 +284,3 @@ class LinkedList {
 	}
 }
 
-export { Node, LinkedList };
