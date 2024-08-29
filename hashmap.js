@@ -3,8 +3,13 @@ import { LinkedList } from "./linked-list.js";
 class HashMap {
 	constructor() {
 		this._loadFactor = 0.8;
-		this._buckets = new Array(16).fill(new LinkedList());
 		this._numOfKeys = 0;
+
+		// This used to be filled with 'new LinkedList()', but it turns out that
+		// It was filling the entire array with just one linked list which is stupid.
+		// So i swapped it for 'null' instead. and when set() is called,
+		// It automatically fills in the appropriate cell with a new LinkedList().
+		this._buckets = new Array(16).fill(null);
 	}
 
 	hash(key) {
@@ -20,7 +25,12 @@ class HashMap {
 	}
 
 	set(key, val) {
-		const hashCode = hash(key);
+		const hashCode = this.hash(key);
+
+		// because buckets start as null.
+		if (this._buckets[hashCode] == null)
+			this._buckets[hashCode] = new LinkedList();
+
 		const bucket = this._buckets[hashCode];
 
 		// if the bucket is empty, just append and return.
@@ -44,16 +54,16 @@ class HashMap {
 	}
 
 	get(key) {
-		const hashCode = hash(key);
+		const hashCode = this.hash(key);
 		const bucket = this._buckets[hashCode];
 		const nodeIndex = bucket.findByKey(key);
 
 		if (nodeIndex == -1) return null;
-		else return bucket.at(nodeIndex).val;
+		else return bucket.at(nodeIndex).val.val; // ah yes, *val.val* .
 	}
 
 	has(key) {
-		const hashCode = hash(key);
+		const hashCode = this.hash(key);
 		const bucket = this._buckets[hashCode];
 		const nodeIndex = bucket.findByKey(key);
 
@@ -61,11 +71,11 @@ class HashMap {
 	}
 
 	remove(key) {
-		const hashCode = hash(key);
+		const hashCode = this.hash(key);
 		const bucket = this._buckets[hashCode];
 		const nodeIndex = bucket.findByKey(key);
 
-		if (nodeIndex != -1) return false;
+		if (nodeIndex == -1) return false;
 
 		bucket.removeAt(nodeIndex);
 		this._numOfKeys--;
@@ -77,41 +87,39 @@ class HashMap {
 	}
 
 	clear() {
-		this._buckets = new Array(16).fill(new LinkedList());
+		this._buckets = new Array(16).fill(null);
 		this._numOfKeys = 0;
 	}
 
 	keys() {
 		let result = [];
 
-		// this is close to O(n²), ouch.
-		for (bucket in this._buckets) {
-			result.append([...bucket.getKeys()]);
-		}
+		// these are close to O(n²), ouch.
+		this._buckets.forEach((bucket) => {
+			if (bucket != null) result.push(bucket.getKeys());
+		});
 
-		return result;
+		return result.flat();
 	}
 
 	values() {
 		let result = [];
 
-		// this is close to O(n²), ouch.
-		for (bucket in this._buckets) {
-			result.append([...bucket.getValues()]);
-		}
+		this._buckets.forEach((bucket) => {
+			if (bucket != null) result.push(bucket.getValues());
+		});
 
-		return result;
+		return result.flat();
 	}
 
 	entries() {
 		let result = [];
 
-		// this is close to O(n²), ouch.
-		for (bucket in this._buckets) {
-			result.append([...bucket.getPairs()]);
-		}
+		this._buckets.forEach((bucket) => {
+			if (bucket != null) result.push(bucket.getPairs());
+		});
 
-		return result;
+		return result.flat();
 	}
 }
 

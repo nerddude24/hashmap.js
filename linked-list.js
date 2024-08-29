@@ -187,12 +187,23 @@ class LinkedList {
 		console.warn("Warning: Tried to insert at invalid index");
 	}
 
+	clear() {
+		this._head = null;
+		this._tail = null;
+	}
+
 	removeAt(index) {
 		// remove head
 		if (index == 0) {
 			if (this._head == null) {
 				console.warn("Tried to remove head when it's already null!");
 				return null;
+			}
+
+			if (this.size() == 1) {
+				const removed = this._head.val;
+				this.clear(); // just clear when there is only one element.
+				return removed;
 			}
 
 			const removed = this._head;
@@ -241,7 +252,10 @@ class LinkedList {
 		let current = this._head;
 		let keys = [];
 
-		while (current != null) keys.append(current.val.key);
+		while (current != null) {
+			keys.push(current.val.key);
+			current = current.next;
+		}
 
 		return keys;
 	}
@@ -250,7 +264,10 @@ class LinkedList {
 		let current = this._head;
 		let values = [];
 
-		while (current != null) values.append(current.val.val);
+		while (current != null) {
+			values.push(current.val.val);
+			current = current.next;
+		}
 
 		return values;
 	}
@@ -259,8 +276,10 @@ class LinkedList {
 		let current = this._head;
 		let pairs = [];
 
-		while (current != null) pairs.append([...current.val]);
-
+		while (current != null) {
+			pairs.push([current.val.key, current.val.val]);
+			current = current.next;
+		}
 		return pairs;
 	}
 }
