@@ -5,7 +5,7 @@ class Node {
 	}
 }
 
-export default class LinkedList {
+export class LinkedList {
 	constructor() {
 		this._head = null;
 		this._tail = null;
@@ -89,38 +89,12 @@ export default class LinkedList {
 		return false;
 	}
 
-	containsKey(key) {
-		let current = this._head;
-
-		while (current != null) {
-			if (current.val.key === key) return true;
-			current = current.next;
-		}
-
-		// moved through entire list and didn't find target.
-		return false;
-	}
-
 	find(target) {
 		let current = this._head;
 		let currentIndex = 0;
 
 		while (current != null) {
 			if (current.val === target) return currentIndex;
-			current = current.next;
-			currentIndex++;
-		}
-
-		// moved through entire list and didn't find target.
-		return -1;
-	}
-
-	findByKey(key) {
-		let current = this._head;
-		let currentIndex = 0;
-
-		while (current != null) {
-			if (current.val.key === key) return currentIndex;
 			current = current.next;
 			currentIndex++;
 		}
@@ -230,22 +204,23 @@ export default class LinkedList {
 		console.warn("Warning: Tried to remove at invalid index");
 		return null;
 	}
+}
 
-	updateValueAt(index, newVal) {
+export class PairLinkedList extends LinkedList {
+	constructor() {
+		super();
+	}
+
+	containsKey(key) {
 		let current = this._head;
-		let currentIndex = 0;
 
 		while (current != null) {
-			if (currentIndex === index) {
-				current.val.val = newVal;
-				return;
-			}
-
+			if (current.val.key === key) return true;
 			current = current.next;
-			currentIndex++;
 		}
 
-		console.warn("Tried to update value at invalid index: " + index);
+		// moved through entire list and didn't find target.
+		return false;
 	}
 
 	getKeys() {
@@ -282,5 +257,35 @@ export default class LinkedList {
 		}
 		return pairs;
 	}
-}
 
+	updateValueAt(index, newVal) {
+		let current = this._head;
+		let currentIndex = 0;
+
+		while (current != null) {
+			if (currentIndex === index) {
+				current.val.val = newVal;
+				return;
+			}
+
+			current = current.next;
+			currentIndex++;
+		}
+
+		console.warn("Tried to update value at invalid index: " + index);
+	}
+
+	findByKey(key) {
+		let current = this._head;
+		let currentIndex = 0;
+
+		while (current != null) {
+			if (current.val.key === key) return currentIndex;
+			current = current.next;
+			currentIndex++;
+		}
+
+		// moved through entire list and didn't find target.
+		return -1;
+	}
+}
