@@ -13,4 +13,4 @@ or do whatever you want with it!
 
 ## linked-list.js ?
 
-I used my own linked list implementation which you can find [here](https://github.com/nerddude24/linked-list.js).
+I used my own linked list implementation which you can find [here](https://github.com/nerddude24/linked_lists.js).
